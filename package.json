@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/antonedvard/isIt/issues"
   },
-  "homepage": "https://github.com/antonedvard/isIt#readme"
+  "homepage": "https://github.com/antonedvard/isIt#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.6"
+  }
 }

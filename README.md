@@ -6,6 +6,91 @@ Basicly just another sugary syntax wrap around typechecking!
 
 At the moment you can just download it! Still learning here!
 
+## Examples
+
+**isIt(input).what(opts = {})**
+
+Get a string containing what the input is:
+```javascript
+isIt(input).what() // Returns Function || Array || String || Event || Boolean || Integer || tells you that he couldn't figure it out.
+```
+
+**isIt(obj).object(opts = {})**
+
+Returns `true` if the input is a object or `false` if its not:
+```javascript
+isIt(obj).object() // true
+isIt(function).object() // false
+isIt(array).object() // false
+```
+
+**isIt(array).array(opts = {})**
+
+Returns `true` if the input is an array or `false` if its not:
+```javascript
+isIt(array).array() // true
+isIt(string).array() // false
+```
+
+**isIt(function).func(opts = {})**
+
+Returns `true` if the input is a function or `false` if its not:
+```javascript
+isIt(() => {}).func() // true
+isIt(object).array() // false
+```
+
+**isIt(string).string(opts = {})**
+
+Returns `true` if the input is a string or `false` if its not:
+```javascript
+isIt(string).string() // true
+isIt(array).string() // false
+```
+
+**isIt(event).event(opts = {})**
+
+Returns `true` if the input is an event or `false` if its not:
+```javascript
+isIt(event).event() // true
+isIt(object).event() // false
+```
+
+**isIt(boolean).boolean(opts = {})**
+
+Returns `true` if the input is an boolean or `false` if its not:
+```javascript
+isIt(true).boolean() // true
+isIt(false).boolean() // true
+isIt(string).boolean() // false
+```
+
+**isIt(int).int(opts = {})**
+
+Returns `true` if the input is an integer or `false` if its not:
+```javascript
+isIt(42).integer() // true
+isIt('50').integer() // false
+```
+
+**isIt(null).nothing(opts = {})**
+
+Returns `true` if the input is `undefined || null` or `false` if its not:
+```javascript
+isIt(null).nothing() // true
+isIt(undefined).nothing() // true
+isIt(false).nothing() // false
+```
+
+**isIt(url).link(opts = {})**
+
+Returns `true` if the input is a link/url or `false` if its not:
+```javascript
+isIt('http://github.com').link() // true
+isIt('a plain string').link() // false
+```
+
+***
 ### Prerequisites
 
 What things you need to install the software and how to install them
@@ -58,31 +143,23 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+vscode and my fingers.
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md]() for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
 * **Anton Kristensen** - *Initial work* - [Anton Kristensen](https://github.com/antonedvard)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/antonedvard/isIt/contributors) who participated in this project.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
-

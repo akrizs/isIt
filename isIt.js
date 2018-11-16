@@ -1,5 +1,9 @@
 function isIt() {
   const what = [...arguments];
+
+  const urlRegex = '^(?!mailto:)(?:(?:http|https|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$'
+  const url = new RegExp(urlRegex, 'i');
+
   return {
     args: what,
     what: function (opts) {
@@ -16,10 +20,10 @@ function isIt() {
         if (this.event(obj)) {
           return 'Event'
         }
-        if (this.boolean) {
+        if (this.boolean(obj)) {
           return 'Boolean'
         }
-        if (this.int) {
+        if (this.int(obj)) {
           return 'Integer'
         } else {
           return "I couldn't figure out what this is...";
@@ -162,6 +166,44 @@ function isIt() {
         return check(this.args[0]);
       }
 
+    },
+    nothing: function (opts) {
+      const check = (el) => {
+        if (el === undefined || el === null) {
+          return true
+        } else {
+          return false
+        }
+      }
+      if (this.args.length > 1) {
+        let returns = [];
+        this.args.forEach(arg => {
+          returns.push(check(arg));
+        })
+        return returns;
+      } else {
+        return check(this.args[0]);
+      }
+    },
+    link: function (opts) {
+      const check = (link) => {
+        if (typeof link !== 'string') {
+          return false
+        }
+        link = link.toLowerCase();
+
+        return link.length < 083 && url.test(link);
+      }
+
+      if (this.args.length > 1) {
+        let returns = [];
+        this.args.forEach(arg => {
+          returns.push(check(arg));
+        })
+        return returns;
+      } else {
+        return check(this.args[0]);
+      }
     }
   }
 }
