@@ -1,0 +1,11 @@
+{
+  "name": "isit",
+  "version": "0.0.1",
+  "description": "Just Another Simpler Checking Tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anton Kristensen <anton@antonedvard.com>",
+  "license": "ISC"
+}
