@@ -7,5 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Anton Kristensen <anton@antonedvard.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antonedvard/isIt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/antonedvard/isIt/issues"
+  },
+  "homepage": "https://github.com/antonedvard/isIt#readme"
 }
