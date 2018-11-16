@@ -1,12 +1,12 @@
-function isIt() {
-  const what = [...arguments];
+function isIt(opts = {}) {
+
 
   const urlRegex = '^(?!mailto:)(?:(?:http|https|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$'
   const url = new RegExp(urlRegex, 'i');
 
   return {
-    args: what,
-    what: function (opts) {
+    arg: undefined,
+    what: function () {
       const check = (obj) => {
         if (this.func(obj)) {
           return 'Function'
@@ -25,25 +25,31 @@ function isIt() {
         }
         if (this.int(obj)) {
           return 'Integer'
+        }
+        if (this.nothing(obj)) {
+          return 'Nothing'
+        }
+        if (this.object(obj)) {
+          return 'Object'
         } else {
           return "I couldn't figure out what this is...";
         }
       }
 
-      if (this.args.length > 1) {
+      if (arguments.length > 1) {
         let returns = [];
-        this.args.forEach(arg => {
+        Array.from(arguments).forEach(arg => {
           returns.push(check(arg));
         });
         return returns;
       } else {
-        return check(this.args[0]);
+        return check(arguments[0]);
       }
 
 
     },
 
-    object: function (opts) {
+    object: function () {
       const check = (obj) => {
         if (this.func(obj)) {
           return false;
@@ -61,48 +67,55 @@ function isIt() {
         return true;
       }
 
-      if (this.args.length > 1) {
+      if (arguments.length > 1) {
         let returns = [];
-        this.args.forEach(arg => {
+        Array.from(arguments).forEach(arg => {
           returns.push(check(arg));
         });
         return returns;
       } else {
-        return check(this.args[0]);
+        return check(arguments[0]);
       }
 
 
     },
 
-    array: function (opts) {
+    array: function () {
       const check = (arr) => {
         return Array.isArray(arr);
       }
 
-      if (this.args.length > 1) {
+      if (arguments.length > 1) {
         let returns = [];
-        this.args.forEach(arg => {
+        Array.from(arguments).forEach(arg => {
           returns.push(check(arg))
         });
         return returns;
       } else {
-        return check(this.args[0])
+        return check(arguments[0])
       }
     },
 
-    func: function (opts) {
+    func: function () {
       const check = (fn) => {
-        return Object.getPrototypeOf(fn) === Object.getPrototypeOf(function () {});
+        if (fn === undefined || fn === null) {
+          return false
+        } else
+        if (typeof fn === 'function') {
+          return Object.getPrototypeOf(fn) === Object.getPrototypeOf(function () {});
+        } else {
+          return false
+        }
       }
 
-      if (this.args.length > 1) {
+      if (arguments.length > 1) {
         let returns = [];
-        this.args.forEach(arg => {
+        Array.from(arguments).forEach(arg => {
           returns.push(check(arg))
         })
         return returns;
       } else {
-        return check(this.args[0])
+        return check(arguments[0])
       }
     },
 
@@ -110,64 +123,64 @@ function isIt() {
       const check = (str) => {
         return typeof str === 'string';
       }
-      if (this.args.length > 1) {
+      if (arguments.length > 1) {
         let returns = [];
-        this.args.forEach(arg => {
+        Array.from(arguments).forEach(arg => {
           returns.push(check(arg));
         })
         return returns;
       } else {
-        return check(this.args[0]);
+        return check(arguments[0]);
       }
     },
 
-    event: function (opts) {
+    event: function () {
       const check = (e) => {
         return e instanceof Event;
       }
-      if (this.args.length > 1) {
+      if (arguments.length > 1) {
         let returns = [];
-        this.args.forEach(arg => {
+        Array.from(arguments).forEach(arg => {
           returns.push(check(arg));
         })
         return returns;
       } else {
-        return check(this.args[0]);
+        return check(arguments[0]);
       }
     },
 
-    boolean: function (opts) {
+    boolean: function () {
       const check = (bool) => {
         return typeof bool === 'boolean';
       }
-      if (this.args.length > 1) {
+      if (arguments.length > 1) {
         let returns = []
-        this.args.forEach(arg => {
+        Array.from(arguments).forEach(arg => {
           returns.push(check(arg));
         })
         return returns;
       } else {
-        return check(this.args[0]);
+        return check(arguments[0]);
       }
     },
 
-    int: function (opts) {
+    int: function () {
       const check = (int) => {
         return typeof int === 'number';
       }
 
-      if (this.args.length > 1) {
+      if (arguments.length > 1) {
         let returns = [];
-        this.args.forEach(arg => {
+        Array.from(arguments).forEach(arg => {
           returns.push(check(arg));
         })
         return returns;
       } else {
-        return check(this.args[0]);
+        return check(arguments[0]);
       }
 
     },
-    nothing: function (opts) {
+    nothing: function () {
       const check = (el) => {
         if (el === undefined || el === null) {
           return true
@@ -175,34 +188,34 @@ function isIt() {
           return false
         }
       }
-      if (this.args.length > 1) {
+      if (arguments.length > 1) {
         let returns = [];
-        this.args.forEach(arg => {
+        Array.from(arguments).forEach(arg => {
           returns.push(check(arg));
         })
         return returns;
       } else {
-        return check(this.args[0]);
+        return check(arguments[0]);
       }
     },
-    link: function (opts) {
+    link: function () {
       const check = (link) => {
         if (typeof link !== 'string') {
           return false
         }
         link = link.toLowerCase();
 
-        return link.length < 083 && url.test(link);
+        return link.length < 2083 && url.test(link);
       }
 
-      if (this.args.length > 1) {
+      if (arguments.length > 1) {
         let returns = [];
-        this.args.forEach(arg => {
+        Array.from(arguments).forEach(arg => {
           returns.push(check(arg));
         })
         return returns;
       } else {
-        return check(this.args[0]);
+        return check(arguments[0]);
       }
     }
   }

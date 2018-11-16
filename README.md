@@ -8,86 +8,97 @@ At the moment you can just download it! Still learning here!
 
 ## Examples
 
-**isIt(input).what(opts = {})**
+**isIt(opts = {}).what(input)**
 
 Get a string containing what the input is:
 ```javascript
-isIt(input).what() // Returns Function || Array || String || Event || Boolean || Integer || tells you that he couldn't figure it out.
+isIt().what(input) // Returns Function || Array || String || Event || Boolean || Integer || tells you that he couldn't figure it out.
 ```
 
-**isIt(obj).object(opts = {})**
+**isIt(opts = {}).object(obj)**
 
 Returns `true` if the input is a object or `false` if its not:
 ```javascript
-isIt(obj).object() // true
-isIt(function).object() // false
-isIt(array).object() // false
+isIt().object(Object); // true
+isIt().object(Function); // false
+isIt().object(Array); // false
 ```
 
-**isIt(array).array(opts = {})**
+**isIt(opts = {}).array(array)**
 
 Returns `true` if the input is an array or `false` if its not:
 ```javascript
-isIt(array).array() // true
-isIt(string).array() // false
+isIt().array(Array); // true
+isIt().array(String); // false
 ```
 
-**isIt(function).func(opts = {})**
+**isIt(opts = {}).func(function)**
 
 Returns `true` if the input is a function or `false` if its not:
 ```javascript
-isIt(() => {}).func() // true
-isIt(object).func() // false
+isIt().func(Function); // true
+isIt().func(Object); // false
 ```
 
-**isIt(string).string(opts = {})**
+**isIt(opts = {}).string(string)**
 
 Returns `true` if the input is a string or `false` if its not:
 ```javascript
-isIt(string).string() // true
-isIt(array).string() // false
+isIt().string(String); // true
+isIt().string(Array); // false
 ```
 
-**isIt(event).event(opts = {})**
+**isIt(opts = {}).event(event)**
 
 Returns `true` if the input is an event or `false` if its not:
 ```javascript
-isIt(event).event() // true
-isIt(object).event() // false
+isIt().event(Event); // true
+isIt().event(Object); // false
 ```
 
-**isIt(boolean).boolean(opts = {})**
+**isIt(opts = {}).boolean(boolean)**
 
 Returns `true` if the input is an boolean or `false` if its not:
 ```javascript
-isIt(true).boolean() // true
-isIt(false).boolean() // true
-isIt(string).boolean() // false
+isIt().boolean(true); // true
+isIt().boolean(false); // true
+isIt().boolean(undefined); // false
 ```
 
-**isIt(int).int(opts = {})**
+**isIt(opts = {}).int(int)**
 
 Returns `true` if the input is an integer or `false` if its not:
 ```javascript
-isIt(42).integer() // true
-isIt('50').integer() // false
+isIt().integer(42); // true
+isIt().integer('50'); // false
 ```
 
-**isIt(null).nothing(opts = {})**
+**isIt(opts = {}).nothing(null)**
 
 Returns `true` if the input is `undefined || null` or `false` if its not:
 ```javascript
-isIt(null).nothing() // true
-isIt(undefined).nothing() // true
-isIt(false).nothing() // false
+isIt().nothing(null); // true
+isIt().nothing(undefined); // true
+isIt().nothing(false); // false
 ```
 
-**isIt(url).link(opts = {})**
+**isIt(opts = {}).link(url)**
 
 Returns `true` if the input is a link/url or `false` if its not:
 ```javascript
-isIt('http://github.com').link() // true
-isIt('a plain string').link() // false
+isIt().link('http://github.com'); // true
+isIt().link('a plain string'); // false
+```
+
+## Multiple
+
+**isIt(opts = {}).what('string', [], {}, function () {}, false, 43, undefined, null)**
+```javascript
+isIt().what('string', [], {}, function () {}, false, 43, undefined, null)
+```
+Outputs:
+```javascript
+["String", "Array", "Object", "Function", "Boolean", "Integer", "Nothing", "Nothing"]
 ```
 
 ***
