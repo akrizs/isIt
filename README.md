@@ -37,7 +37,7 @@ isIt(string).array() // false
 Returns `true` if the input is a function or `false` if its not:
 ```javascript
 isIt(() => {}).func() // true
-isIt(object).array() // false
+isIt(object).func() // false
 ```
 
 **isIt(string).string(opts = {})**
@@ -93,57 +93,36 @@ isIt('a plain string').link() // false
 ***
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Computer, internet and browser, download it from here, npm hopefully soon.
 
 ```
-Give examples
 ```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+Download from github.
 
-Say what the step will be
+import it
 
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
+```javascript
+import isIt from '../isIt';
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+And use
 
 ```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
+isIt([1,2,3,4,5]).what() // Array
 ```
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Use your favorite bundler :)
+Wrote this with [Parcel](https://parceljs.org/)
 
 ## Built With
 
 vscode and my fingers.
+[Parcel](https://parceljs.org/)
 
 ## Contributing
 
@@ -151,6 +130,7 @@ Please read [CONTRIBUTING.md]() for details on our code of conduct, and the proc
 
 ## Versioning
 
+0.0.1 - Thats just that!
 
 ## Authors
 
@@ -161,5 +141,3 @@ See also the list of [contributors](https://github.com/antonedvard/isIt/contribu
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
