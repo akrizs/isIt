@@ -1,13 +1,52 @@
-function isIt(opts = {}) {
+export default function isIt(opts = {
+  string: {
+    first: true
+  },
+  function: {
+    first: true
+  },
+  array: {
+    first: true
+  },
+  object: {
+    first: true
+  },
+  event: {
+    first: true
+  },
+  int: {
+    first: true
+  }
+}, cb) {
 
+  if (!!opts.string) {
+    // Handle the string options
+  }
+  if (!!opts.array) {
 
+  }
+  if (!!opts.object) {
+
+  }
+  if (!!opts.function) {
+
+  }
+  if (!!opts.event) {
+
+  }
+  if (!!opts.int) {
+
+  }
+  console.log(opts);
   const urlRegex = '^(?!mailto:)(?:(?:http|https|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$'
   const url = new RegExp(urlRegex, 'i');
 
   return {
+    cb: Function,
+    opts: opts,
     arg: undefined,
     what: function () {
-      const check = (obj) => {
+      function check(obj) {
         if (this.func(obj)) {
           return 'Function'
         }
@@ -50,7 +89,7 @@ function isIt(opts = {}) {
     },
 
     object: function () {
-      const check = (obj) => {
+      function check(obj) {
         if (this.func(obj)) {
           return false;
         }
@@ -81,7 +120,7 @@ function isIt(opts = {}) {
     },
 
     array: function () {
-      const check = (arr) => {
+      function check(arr) {
         return Array.isArray(arr);
       }
 
@@ -97,7 +136,7 @@ function isIt(opts = {}) {
     },
 
     func: function () {
-      const check = (fn) => {
+      function check(fn) {
         if (fn === undefined || fn === null) {
           return false
         } else
@@ -120,7 +159,7 @@ function isIt(opts = {}) {
     },
 
     string: function (opts) {
-      const check = (str) => {
+      function check(str) {
         return typeof str === 'string';
       }
       if (arguments.length > 1) {
@@ -135,7 +174,7 @@ function isIt(opts = {}) {
     },
 
     event: function () {
-      const check = (e) => {
+      function check(e) {
         return e instanceof Event;
       }
       if (arguments.length > 1) {
@@ -150,7 +189,7 @@ function isIt(opts = {}) {
     },
 
     boolean: function () {
-      const check = (bool) => {
+      function check(bool) {
         return typeof bool === 'boolean';
       }
       if (arguments.length > 1) {
@@ -165,7 +204,7 @@ function isIt(opts = {}) {
     },
 
     int: function () {
-      const check = (int) => {
+      function check(int) {
         return typeof int === 'number';
       }
 
@@ -181,7 +220,7 @@ function isIt(opts = {}) {
 
     },
     nothing: function () {
-      const check = (el) => {
+      function check(el) {
         if (el === undefined || el === null) {
           return true
         } else {
@@ -199,7 +238,7 @@ function isIt(opts = {}) {
       }
     },
     link: function () {
-      const check = (link) => {
+      function check(link) {
         if (typeof link !== 'string') {
           return false
         }
@@ -220,10 +259,3 @@ function isIt(opts = {}) {
     }
   }
 }
-
-
-
-
-module.exports = (() => {
-  return isIt
-})();

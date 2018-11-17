@@ -121,8 +121,8 @@ import isIt from '../isIt';
 
 And use
 
-```
-isIt([1,2,3,4,5]).what() // Array
+```javascript
+isIt().what([1,2,3,4,5]) // Array
 ```
 
 ## Deployment
